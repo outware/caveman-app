@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "au.com.outware.cavemanapp"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    androidSupportVersion = '23.1.0'
+    daggerVersion = '2.0'
+}
+
+dependencies {
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    compile "com.android.support:design:$androidSupportVersion",
+            "com.android.support:appcompat-v7:$androidSupportVersion",
+            "com.android.support:recyclerview-v7:$androidSupportVersion",
+            'com.jakewharton:butterknife:7.0.1',
+            'com.google.code.gson:gson:2.4',
+            "com.google.dagger:dagger:$daggerVersion",
+            'au.com.outware:caveman:1.0.0'
+
+    testCompile 'org.hamcrest:hamcrest-all:1.3',
+                'org.mockito:mockito-all:1.10.19'
+    testCompile('junit:junit:4.12') {
+        exclude module: 'hamcrest-core'
+    }
+    testCompile('org.robolectric:robolectric:3.0') {
+        exclude module: 'junit-dep'
+        exclude module: 'mockito-core'
+    }
+}

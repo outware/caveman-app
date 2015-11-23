@@ -1,0 +1,20 @@
+[
+  {
+    "key": "BaseURL",
+    "name": "Base URL",
+    "type": "STRING",
+    "defaultValue": "Set your URL here"
+  },
+  {
+    "key": "LogEnabled",
+    "name": "Enable Logs",
+    "type": "BOOLEAN",
+    "defaultValue": false
+  },
+  {
+    "key": "Timeout",
+    "name": "Timeout",
+    "type": "NUMBER",
+    "defaultValue": 1000
+  }
+]
