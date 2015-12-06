@@ -1,9 +1,11 @@
 package au.com.outware.cavemanapp.presentation.view;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     MainActivityViewModel viewModel;
 
     private ArrayAdapter<Environment> adapter;
+    @Nullable
+    private Dialog dialog;
 
     @Bind(R.id.list)
     ListView listView;
@@ -68,10 +72,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         configureList();
     }
 
-    private void configureList() {
-        enableButtons(viewModel.shouldEnableButtons());
-        listView.setSelection(viewModel.getSelectedItemPosition());
-        listView.setItemChecked(viewModel.getSelectedItemPosition(), true);
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+            dialog = null;
+        }
     }
 
     @Override
@@ -107,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             configureList();
         }
         dialog.dismiss();
+        this.dialog = null;
     }
 
     @OnClick(R.id.btn_add)
@@ -126,10 +135,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @OnClick(R.id.btn_delete)
     @SuppressWarnings("unused")
     void onDeleteClick() {
-        new AlertDialog.Builder(this).setTitle(R.string.title_delete)
+        dialog = new AlertDialog.Builder(this).setTitle(R.string.title_delete)
                 .setMessage(R.string.delete_message)
                 .setPositiveButton(R.string.delete_positive, this)
                 .setNegativeButton(R.string.cancel, this).show();
+    }
+
+    private void configureList() {
+        enableButtons(viewModel.shouldEnableButtons());
+        listView.setSelection(viewModel.getSelectedItemPosition());
+        listView.setItemChecked(viewModel.getSelectedItemPosition(), true);
     }
 
     /**
@@ -137,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
      *
      * @param enable
      */
-    private void enableButtons(Boolean enable) {
+    private void enableButtons(boolean enable) {
         editButton.setEnabled(enable);
         deleteButton.setEnabled(enable);
     }

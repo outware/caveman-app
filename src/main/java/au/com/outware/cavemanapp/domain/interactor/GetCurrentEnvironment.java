@@ -34,6 +34,7 @@ public class GetCurrentEnvironment implements UseCase<Environment> {
             for (Environment e : environmentRepository.getEnvironments()) {
                 if (e.isProduction()) {
                     environment = e;
+                    break;
                 }
             }
         } else {

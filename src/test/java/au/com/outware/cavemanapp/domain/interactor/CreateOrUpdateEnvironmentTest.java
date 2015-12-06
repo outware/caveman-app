@@ -49,7 +49,7 @@ public class CreateOrUpdateEnvironmentTest {
     }
 
     @Test
-    public void whenEnvironmentDoesExist_updatenvironment() {
+    public void whenEnvironmentDoesExist_updateEnvironment() {
         // Arrange
         List<Environment> environments = new ArrayList<>();
         Environment environment = new Environment();

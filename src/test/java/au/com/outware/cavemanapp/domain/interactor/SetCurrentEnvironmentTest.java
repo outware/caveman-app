@@ -25,7 +25,7 @@ public class SetCurrentEnvironmentTest {
     }
 
     @Test
-    public void currentEnvironmentIsSaced() {
+    public void currentEnvironmentIsSaved() {
         // Arrange
         Environment environment = new Environment();
 
