@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Production",
+    "properties": null
+  },
+  {
+    "name": "Development",
+    "properties": {
+      "BaseURL": "api-dev.example.com",
+      "LogEnabled": true,
+      "Timeout": 2000
+    }
+  },
+  {
+    "name": "Staging",
+    "properties": {
+      "BaseURL": "api-staging.example.com",
+      "LogEnabled": false,
+      "Timeout": 250.5
+    }
+  }
+]

@@ -1,0 +1,42 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="au.com.outware.cavemanapp">
+
+    <permission
+        android:name="au.com.outware.caveman.ACCESS_DATA"
+        android:protectionLevel="signature"/>
+
+    <uses-permission android:name="au.com.outware.caveman.ACCESS_DATA"/>
+
+    <application
+        android:name=".application.CavemanApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+
+        <activity
+            android:name="au.com.outware.cavemanapp.presentation.view.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="au.com.outware.cavemanapp.presentation.view.EditEnvironmentActivity"
+            android:label="@string/title_edit_environment" />
+
+        <provider
+            android:name=".contentprovider.CavemanProvider"
+            android:authorities="au.com.outware.caveman.contentprovider"
+            android:exported="true"
+            android:permission="au.com.outware.caveman.ACCESS_DATA"/>
+
+    </application>
+
+</manifest>
