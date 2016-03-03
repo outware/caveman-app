@@ -7,7 +7,6 @@ package au.com.outware.cavemanapp.data.model;
 public final class ConfigurationProperty <T> {
     String key;
     String name;
-    PropertyType type;
     T defaultValue;
 
     public String getKey() {
@@ -18,15 +17,11 @@ public final class ConfigurationProperty <T> {
         return name;
     }
 
-    public PropertyType getType() {
-        return type;
+    public Class getType() {
+        return defaultValue.getClass();
     }
 
     public T getDefaultValue() {
         return defaultValue;
-    }
-
-    public enum PropertyType {
-        BOOLEAN, STRING, NUMBER
     }
 }
