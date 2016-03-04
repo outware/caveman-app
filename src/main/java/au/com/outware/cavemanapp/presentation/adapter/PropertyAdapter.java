@@ -44,36 +44,50 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if(setEnvironmentName && position == 0) {
-            return VIEW_TYPE_ENVIRONMENT_NAME;
+        int viewType = -1;
+
+        if (setEnvironmentName && position == 0) {
+            viewType = VIEW_TYPE_ENVIRONMENT_NAME;
+        } else {
+            final Class propertyType = properties.get(position - (setEnvironmentName ? 1 : 0)).getType();
+            if (propertyType == Boolean.class) {
+                viewType =  VIEW_TYPE_BOOLEAN;
+            } else if (propertyType == String.class) {
+                viewType =  VIEW_TYPE_STRING;
+            } else if(Number.class.isAssignableFrom(propertyType)) {
+                viewType =  VIEW_TYPE_NUMBER;
+            }
         }
 
-        final ConfigurationProperty.PropertyType propertyType = properties.get(position - (setEnvironmentName ? 1 : 0)).getType();
-        if(propertyType == ConfigurationProperty.PropertyType.BOOLEAN) {
-            return VIEW_TYPE_BOOLEAN;
-        } else if(propertyType == ConfigurationProperty.PropertyType.NUMBER) {
-            return VIEW_TYPE_NUMBER;
-        } else {
-            return VIEW_TYPE_STRING;
-        }
+        return viewType;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ViewHolder viewHolder;
+
         switch (viewType) {
             case VIEW_TYPE_ENVIRONMENT_NAME:
                 View nameView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_env_name, parent, false);
-                return new NameViewHolder(nameView);
+                viewHolder = new NameViewHolder(nameView);
+                break;
             case VIEW_TYPE_BOOLEAN:
                 View checkboxView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_checkbox, parent, false);
-                return new CheckboxViewHolder(checkboxView);
+                viewHolder = new CheckboxViewHolder(checkboxView);
+                break;
             case VIEW_TYPE_NUMBER:
                 View numericView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_text, parent, false);
-                return new NumericViewHolder(numericView);
-            default:
+                viewHolder = new NumericViewHolder(numericView);
+                break;
+            case VIEW_TYPE_STRING:
                 View textView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_text, parent, false);
-                return new TextViewHolder(textView);
+                viewHolder = new TextViewHolder(textView);
+                break;
+            default:
+                throw new RuntimeException("Unsupported property type");
         }
+
+        return viewHolder;
     }
 
     @SuppressWarnings("unchecked")
