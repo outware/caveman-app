@@ -7,7 +7,7 @@
     "name": "Development",
     "properties": {
       "BaseURL": "api-dev.example.com",
-      "LogEnabled": true,
+      "LoggingEnabled": true,
       "Timeout": 2000
     }
   },
@@ -15,7 +15,7 @@
     "name": "Staging",
     "properties": {
       "BaseURL": "api-staging.example.com",
-      "LogEnabled": false,
+      "LoggingEnabled": false,
       "Timeout": 250.5
     }
   }

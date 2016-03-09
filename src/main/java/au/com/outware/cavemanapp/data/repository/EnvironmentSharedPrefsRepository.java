@@ -33,7 +33,7 @@ public class EnvironmentSharedPrefsRepository implements EnvironmentRepository {
         editor = sharedPreferences.edit();
 
         if(!sharedPreferences.contains(ENVIRONMENT_LIST)) {
-            String environment = RawReader.readStringFromRaw(R.raw.environment, context);
+            String environment = RawReader.readStringFromRaw(R.raw.environments, context);
             editor.putString(ENVIRONMENT_LIST, environment).commit();
         }
     }
