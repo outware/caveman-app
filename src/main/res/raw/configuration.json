@@ -5,8 +5,8 @@
     "defaultValue": "Set your URL here"
   },
   {
-    "key": "LogEnabled",
-    "name": "Enable Logs",
+    "key": "LoggingEnabled",
+    "name": "Enable Logging",
     "defaultValue": false
   },
   {
